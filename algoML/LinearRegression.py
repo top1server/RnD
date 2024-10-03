@@ -6,8 +6,8 @@ class LinearRegression:
         """
         Init Linear Regression Algorithm with parameters:
         - X(matrix): input data matrix
-        - y(vector): ouput data vector
-        - w(vector): weight vector [w0 (bias), w1, ...]
+        - y(vector): input data vector
+        - w(vector): output weight vector [w0 (bias), w1, ...]
         """
         self.X = X
         self.y = y
@@ -29,4 +29,17 @@ class LinearRegression:
         if self.w is None:
             raise ValueError("Model has not been trained yet. Call the train() method first.")
         return self.w
+    
+    def predict(self, X_new):
+        """
+        Predict method.
+        """
+        if self.w is None:
+            raise ValueError("Model has not been trained yet. Call the train() method first.")
+
+        one = np.ones((X_new.shape[0], 1))
+        Xbar_new = np.concatenate((one, X_new), axis=1)
+        y_pred = Xbar_new @ self.w
+        return y_pred
+
 
